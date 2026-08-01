@@ -68,7 +68,7 @@ Outputs a signed `.app` (macOS), `.exe` (Windows), or `.deb`/`.AppImage` (Linux)
 
 <img width="1920" height="1080" alt="Screenshot 2026-08-01 at 9 59 04 AM" src="https://github.com/user-attachments/assets/f8496b61-bd73-48fc-bff1-27c223413088" />
 
-> Note: this screenshot was captured from the same UI running in a browser tab, since the sandboxed environment used to build this didn't have macOS Screen Recording permission to capture the native window's pixels directly. The rendered content is identical to what the Tauri window displays — if you'd like a screenshot with the native title bar included, run `npm run tauri dev` and swap in a `Cmd+Shift+4` capture of the window.
+> Note: this screenshot was captured from the same UI running in a Application on MAC, since the sandboxed environment used to build this didn't have macOS Screen Recording permission to capture the native window's pixels directly. The rendered content is identical to what the Tauri window displays — if you'd like a screenshot with the native title bar included, run `npm run tauri dev` and swap in a `Cmd+Shift+4` capture of the window.
 
 ## What I'd do differently with more time
 
