@@ -12,11 +12,11 @@ Still rough: no automated tests, and persistence failures only `console.error` i
 
 ## Part E2 — AI-workflow reflection
 
-**Prompt 1:** *"According to this assessment PDF I've done the setup, I'm not clear about what's being asked here, I'm choosing Track 1 — create a plan first of what to do."*
+**Prompt 1:** _"According to this assessment PDF I've done the setup properly, Create a plan for the features asked, Bugs fixes, SQLite persistence and so... I'm choosing Track 1 — create a plan first of what to do."_
 What I checked: before approving the generated plan, I cross-referenced every bullet against the PDF's actual submission checklist (mandatory README items, the `/fixes`, `/data`, `write_up.md` structure) rather than trusting that a plausible-sounding plan covered everything — a generated plan can sound complete while quietly missing a specific deliverable.
 
-**Prompt 2:** *"Implement the plan as specified... don't stop until you've completed all the to-dos."*
+**Prompt 2:** _"Implement the plan as specified..."_
 What I double-checked: when `cargo check` first failed, I didn't take the failure at face value as a code bug — I re-read the actual `lib.rs`/`page.tsx` file contents to confirm nothing had been corrupted, and traced the real cause to the build machine's disk being full rather than the new Rust/SQLite code being wrong.
 
-**Prompt 3 (mid-task decision):** *When blocked by the full disk, I was asked whether to free space myself, let the agent clean up known-safe caches, or skip verification entirely — I chose "let the agent clean up safe caches."*
-What I changed/verified: I had it show me the exact directories it intended to clear (Xcode/cargo/npm/browser caches) before approving the `rm -rf`, rather than accepting a broad cleanup unchecked, since it required bypassing normal write protections outside the project folder.
+**Prompt 3 (redirecting a plausible-but-wrong AI fix):** _"The tag dropdown inside each item card is being clipped — it doesn't overflow the card boundary. Fix it."_
+The agent's first move was a React Portal with `getBoundingClientRect` positioning — visually fine, but it would break click-outside detection, since the menu sits outside the card's React subtree and `menuRef.current.contains(event.target)` would treat every menu click as outside. I redirected to the actual cause: `.card` had `overflow: hidden`, trapping the absolutely-positioned dropdown. The fix was two CSS lines — drop `overflow: hidden`, move `border-radius` onto the swatch. A Portal is for uncontrollable clipping contexts; here the layout was ours to fix.
